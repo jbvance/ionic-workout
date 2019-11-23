@@ -3,10 +3,7 @@ import {
   IonButton,
   IonContent,
   IonHeader,
-  IonIcon,
-  IonImg,
-  IonItem,
-  IonList,
+  IonIcon,  
   IonBackButton,
   IonPage,
   IonTitle,
@@ -17,7 +14,7 @@ import {
 } from '@ionic/react';
 import { addCircleOutline, removeCircleOutline } from 'ionicons/icons';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import {
   CircularProgressbarWithChildren,
   buildStyles
@@ -44,10 +41,10 @@ const WorkoutStartPage: React.FC = () => {
   }, [duration]);
 
   const increaseDuration = () => {
-    return duration < 60 ? setDuration(duration + 5) : setDuration(60);
+    return duration < maxDuration ? setDuration(duration + 5) : setDuration(60);
   };
   const decreaseDuration = () => {
-    return duration > 5 ? setDuration(duration - 5) : setDuration(5);
+    return duration > minDuration ? setDuration(duration - 5) : setDuration(5);
   };
 
   return workout ? (
@@ -123,13 +120,15 @@ const WorkoutStartPage: React.FC = () => {
           </IonRow>
           <IonRow>
             <IonCol size="8" offset="2">
-              <IonButton
-                style={{ textTransform: 'uppercase' }}
-                expand="full"
-                fill="solid"
-              >
-                Begin Workout
-              </IonButton>
+              <Link to={`/workouts/2/go`}>
+                <IonButton
+                  style={{ textTransform: 'uppercase' }}
+                  expand="full"
+                  fill="solid"
+                >
+                  Begin Workout
+                </IonButton>
+              </Link>
             </IonCol>
           </IonRow>
         </IonGrid>
